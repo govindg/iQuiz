@@ -8,6 +8,14 @@
 
 import UIKit
 
+extension UIApplication {
+    var quizRepository : QuizRepository {
+        get {
+            return QuizRepository.shared
+        }
+    }
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
