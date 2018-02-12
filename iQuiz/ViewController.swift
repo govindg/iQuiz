@@ -47,6 +47,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // Dispose of any resources that can be recreated.
     }
 
-
+    @IBAction func settingsPushed(_ sender: Any) {
+        let alert = UIAlertController(title: "Settings", message: "Settings go here", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK",
+                                      style: .default,
+                                      handler: { _ in
+            NSLog("\"OK\" pressed.")
+        }))
+        self.present(alert, animated: true, completion: {
+            NSLog("The completion handler fired")
+        })
+    }
+    
 }
 
