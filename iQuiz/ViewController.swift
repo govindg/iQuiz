@@ -25,6 +25,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let cell = tableView.dequeueReusableCell(withIdentifier: "LabelCell", for: indexPath)
         cell.textLabel?.text = quiz.name
         cell.detailTextLabel?.text = quiz.description
+        cell.imageView?.image = UIImage(named: ("\(quiz.image)"))
         return cell
     }
     

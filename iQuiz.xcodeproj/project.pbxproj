@@ -76,6 +76,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AC3DA6982031B9EB008BA362 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AC3DA6992031B9F9008BA362 /* Images */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		AC3DA6992031B9F9008BA362 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
 		ACBAABED202F8F4000126A6D = {
 			isa = PBXGroup;
 			children = (
@@ -99,6 +114,7 @@
 		ACBAABF8202F8F4000126A6D /* iQuiz */ = {
 			isa = PBXGroup;
 			children = (
+				AC3DA6982031B9EB008BA362 /* Resources */,
 				ACBAABF9202F8F4000126A6D /* AppDelegate.swift */,
 				ACBAABFB202F8F4000126A6D /* ViewController.swift */,
 				ACBAABFD202F8F4000126A6D /* Main.storyboard */,
