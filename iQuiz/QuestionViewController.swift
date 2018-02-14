@@ -10,18 +10,26 @@ import UIKit
 
 class QuestionViewController: UIViewController {
 
+    @IBOutlet weak var submit: UIButton!
     @IBOutlet weak var questionLabel: UILabel!
     public var questionText: String! = nil
+    public var answerText: String! = nil
     public var answers: [String]! = []
     public var correctAnswer: Int = -1
+    public var questionCounter = -1
+    public var correctCount: Int = 0
+    public var correct = false
+    public var quizLength : Int = 0
     
     func setQuestionLabel(incoming: String) {
         self.questionText = incoming
     }
     
-    func setAnswers(incomingAnswers: [String], correctAnswer: Int) {
+    func setAnswers(incomingAnswers: [String], correctAnswer: Int, counter: Int, quizLength: Int) {
         self.answers = incomingAnswers
         self.correctAnswer = correctAnswer
+        self.questionCounter = counter + 1
+        self.quizLength = quizLength
     }
     
     override func viewDidLoad() {
@@ -30,6 +38,10 @@ class QuestionViewController: UIViewController {
         // Do any additional setup after loading the view.
         if self.questionText != nil && self.answers != nil {
             questionLabel!.text = self.questionText
+            for i in 1...answers.count {
+                let tmp = self.view.viewWithTag(i) as? UIButton
+                tmp!.setTitle(self.answers[i - 1], for: .normal)
+            }
         }
     }
 
@@ -38,15 +50,40 @@ class QuestionViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    @IBAction func answerPushed(_ sender: UIButton) {
+        sender.backgroundColor = UIColor.orange
+        for i in 1...answers.count {
+            if sender.tag != i {
+                let tmp = self.view.viewWithTag(i) as? UIButton
+                tmp!.backgroundColor = UIColor.blue
+            }
+        }
+    }
+    
+    @IBAction func submitPushed(_ sender: UIButton) {
+        for i in 1...answers.count {
+            let tmp = self.view.viewWithTag(i) as? UIButton
+            if tmp!.backgroundColor == UIColor.orange {
+                answerText = tmp!.titleLabel!.text
+                if tmp!.tag == correctAnswer {
+                    correct = true
+                } else {
+                    correct = false
+                }
+                if questionCounter < quizLength {
+                    performSegue(withIdentifier: "AnswerSegue", sender: sender)
+                }
+            }
+        }
+    }
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        switch segue.identifier {
+        default:
+            NSLog("Unknown segue identifier -- " + segue.identifier!)
+        }
     }
-    */
 
 }
