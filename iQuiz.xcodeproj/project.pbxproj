@@ -15,6 +15,7 @@
 		ACBAAC04202F8F4000126A6D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ACBAAC02202F8F4000126A6D /* LaunchScreen.storyboard */; };
 		ACBAAC0F202F8F4000126A6D /* iQuizTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBAAC0E202F8F4000126A6D /* iQuizTests.swift */; };
 		ACBAAC1A202F8F4000126A6D /* iQuizUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBAAC19202F8F4000126A6D /* iQuizUITests.swift */; };
+		ACC7A3BA2033AEEF00EA7D12 /* QuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC7A3B92033AEEF00EA7D12 /* QuestionViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		ACBAAC15202F8F4000126A6D /* iQuizUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = iQuizUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ACBAAC19202F8F4000126A6D /* iQuizUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iQuizUITests.swift; sourceTree = "<group>"; };
 		ACBAAC1B202F8F4000126A6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ACC7A3B92033AEEF00EA7D12 /* QuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,21 +78,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		AC3DA6982031B9EB008BA362 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				AC3DA6992031B9F9008BA362 /* Images */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
-		AC3DA6992031B9F9008BA362 /* Images */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Images;
-			sourceTree = "<group>";
-		};
 		ACBAABED202F8F4000126A6D = {
 			isa = PBXGroup;
 			children = (
@@ -114,7 +101,6 @@
 		ACBAABF8202F8F4000126A6D /* iQuiz */ = {
 			isa = PBXGroup;
 			children = (
-				AC3DA6982031B9EB008BA362 /* Resources */,
 				ACBAABF9202F8F4000126A6D /* AppDelegate.swift */,
 				ACBAABFB202F8F4000126A6D /* ViewController.swift */,
 				ACBAABFD202F8F4000126A6D /* Main.storyboard */,
@@ -122,6 +108,7 @@
 				ACBAAC02202F8F4000126A6D /* LaunchScreen.storyboard */,
 				ACBAAC05202F8F4000126A6D /* Info.plist */,
 				AC3DA69620300945008BA362 /* QuizRepository.swift */,
+				ACC7A3B92033AEEF00EA7D12 /* QuestionViewController.swift */,
 			);
 			path = iQuiz;
 			sourceTree = "<group>";
@@ -280,6 +267,7 @@
 			files = (
 				ACBAABFC202F8F4000126A6D /* ViewController.swift in Sources */,
 				ACBAABFA202F8F4000126A6D /* AppDelegate.swift in Sources */,
+				ACC7A3BA2033AEEF00EA7D12 /* QuestionViewController.swift in Sources */,
 				AC3DA69720300945008BA362 /* QuizRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

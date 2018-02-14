@@ -29,11 +29,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return cell
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let quiz = quizzes![indexPath.row]
-        NSLog("User selected row at \(quiz.name)")
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -58,6 +53,20 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.present(alert, animated: true, completion: {
             NSLog("The completion handler fired")
         })
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let counter = 0
+        switch segue.identifier! {
+        case "QuestionSegue":
+            let destination = segue.destination as! QuestionViewController
+            let cell = sender as! UITableViewCell; let indexPath = quizTable.indexPath(for: cell)
+            let quiz = quizzes![(indexPath?.row)!]
+            destination.setQuestionLabel(incoming: quiz.questionAnswers[counter].question)
+            destination.setAnswers(incomingAnswers: quiz.questionAnswers[counter].answers, correctAnswer: quiz.questionAnswers[counter].correctAnswer)
+        default:
+            NSLog("Unknown segue identifier -- " + segue.identifier!)
+        }
     }
     
 }
