@@ -11,8 +11,6 @@ import UIKit
 class QuestionViewController: UIViewController {
 
     @IBOutlet weak var questionLabel: UILabel!
-    
-    @IBOutlet weak var buttons: UIButton!
     public var questionText: String! = nil
     public var answers: [String]! = []
     public var correctAnswer: Int = -1
