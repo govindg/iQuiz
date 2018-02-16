@@ -267,7 +267,7 @@
                                 <rect key="frame" x="0.0" y="692" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
-                                    <barButtonItem title="Home" id="XfH-lB-nqd">
+                                    <barButtonItem title="Back" id="XfH-lB-nqd">
                                         <connections>
                                             <segue destination="BYZ-38-t0r" kind="show" identifier="AnswerHomeSegue" id="iXB-fm-UlW"/>
                                         </connections>
@@ -324,7 +324,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="rov-Uj-6Pb"/>
+        <segue reference="aSW-Tj-U6Z"/>
         <segue reference="iXB-fm-UlW"/>
     </inferredMetricsTieBreakers>
 </document>
