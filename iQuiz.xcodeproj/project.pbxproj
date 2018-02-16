@@ -17,6 +17,7 @@
 		ACBAAC1A202F8F4000126A6D /* iQuizUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACBAAC19202F8F4000126A6D /* iQuizUITests.swift */; };
 		ACC7A3BA2033AEEF00EA7D12 /* QuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC7A3B92033AEEF00EA7D12 /* QuestionViewController.swift */; };
 		ACC7A3BC2034CDB100EA7D12 /* AnswerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC7A3BB2034CDB100EA7D12 /* AnswerViewController.swift */; };
+		ACC7A3BE203647F800EA7D12 /* FinishViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACC7A3BD203647F800EA7D12 /* FinishViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		ACBAAC1B202F8F4000126A6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ACC7A3B92033AEEF00EA7D12 /* QuestionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionViewController.swift; sourceTree = "<group>"; };
 		ACC7A3BB2034CDB100EA7D12 /* AnswerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerViewController.swift; sourceTree = "<group>"; };
+		ACC7A3BD203647F800EA7D12 /* FinishViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,13 +107,14 @@
 			children = (
 				ACBAABF9202F8F4000126A6D /* AppDelegate.swift */,
 				ACBAABFB202F8F4000126A6D /* ViewController.swift */,
+				ACC7A3BB2034CDB100EA7D12 /* AnswerViewController.swift */,
 				ACBAABFD202F8F4000126A6D /* Main.storyboard */,
 				ACBAAC00202F8F4000126A6D /* Assets.xcassets */,
 				ACBAAC02202F8F4000126A6D /* LaunchScreen.storyboard */,
 				ACBAAC05202F8F4000126A6D /* Info.plist */,
 				AC3DA69620300945008BA362 /* QuizRepository.swift */,
 				ACC7A3B92033AEEF00EA7D12 /* QuestionViewController.swift */,
-				ACC7A3BB2034CDB100EA7D12 /* AnswerViewController.swift */,
+				ACC7A3BD203647F800EA7D12 /* FinishViewController.swift */,
 			);
 			path = iQuiz;
 			sourceTree = "<group>";
@@ -273,6 +276,7 @@
 				ACC7A3BC2034CDB100EA7D12 /* AnswerViewController.swift in Sources */,
 				ACC7A3BA2033AEEF00EA7D12 /* QuestionViewController.swift in Sources */,
 				AC3DA69720300945008BA362 /* QuizRepository.swift in Sources */,
+				ACC7A3BE203647F800EA7D12 /* FinishViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

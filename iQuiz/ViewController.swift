@@ -56,14 +56,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let count = 0
+        let count = 1
         switch segue.identifier! {
         case "QuestionSegue":
             let destination = segue.destination as! QuestionViewController
             let cell = sender as! UITableViewCell; let indexPath = quizTable.indexPath(for: cell)
             let quiz = quizzes![(indexPath?.row)!]
-            destination.setQuestionLabel(incoming: quiz.questionAnswers[count].question)
-            destination.setAnswers(incomingAnswers: quiz.questionAnswers[count].answers, correctAnswer: quiz.questionAnswers[count].correctAnswer, counter: count, quizLength: quiz.questionAnswers.count)
+            destination.setQuestionLabel(incoming: quiz.questionAnswers[count - 1].question)
+            destination.setAnswers(incomingAnswers: quiz.questionAnswers[count - 1].answers, correctAnswer: quiz.questionAnswers[count - 1].correctAnswer, counter: count, quizLength: quiz.questionAnswers.count)
+            destination.setQuiz(incomingQuiz: quiz)
         default:
             NSLog("Unknown segue identifier -- " + segue.identifier!)
         }

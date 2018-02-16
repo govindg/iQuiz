@@ -52,7 +52,9 @@ class QuizRepository {
         quizzes.append(quiz)
     }
     func populateQuestions() {
+        self.quizzes[0].questionAnswers = []
         quizzes[0].questionAnswers.append(QuestionAnswer(question: "5 x 4", answers: ["10", "5", "9", "20"], correctAnswer: 4))
+        quizzes[0].questionAnswers.append(QuestionAnswer(question: "4 x 6", answers: ["24", "10", "2", "-2"], correctAnswer: 1))
     }
     
     

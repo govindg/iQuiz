@@ -20,16 +20,22 @@ class QuestionViewController: UIViewController {
     public var correctCount: Int = 0
     public var correct = false
     public var quizLength : Int = 0
+    public var quiz : Quiz? = nil
     
     func setQuestionLabel(incoming: String) {
         self.questionText = incoming
     }
     
-    func setAnswers(incomingAnswers: [String], correctAnswer: Int, counter: Int, quizLength: Int) {
+    func setAnswers(incomingAnswers: [String], correctAnswer: Int, counter: Int, quizLength: Int, correctCount: Int = 0) {
         self.answers = incomingAnswers
         self.correctAnswer = correctAnswer
-        self.questionCounter = counter + 1
+        self.questionCounter = counter
         self.quizLength = quizLength
+        self.correctCount = correctCount
+    }
+    
+    func setQuiz(incomingQuiz: Quiz) {
+        self.quiz = incomingQuiz
     }
     
     override func viewDidLoad() {
@@ -60,27 +66,33 @@ class QuestionViewController: UIViewController {
         }
     }
     
-    @IBAction func submitPushed(_ sender: UIButton) {
-        for i in 1...answers.count {
-            let tmp = self.view.viewWithTag(i) as? UIButton
-            if tmp!.backgroundColor == UIColor.orange {
-                answerText = tmp!.titleLabel!.text
-                if tmp!.tag == correctAnswer {
-                    correct = true
-                } else {
-                    correct = false
-                }
-                if questionCounter < quizLength {
-                    performSegue(withIdentifier: "AnswerSegue", sender: sender)
-                }
-            }
-        }
+    @IBAction func submitPushed(_ sender: Any) {
+        performSegue(withIdentifier: "AnswerSegue", sender: sender)
     }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        switch segue.identifier {
+        switch segue.identifier! {
+        case "AnswerSegue":
+            let destination = segue.destination as? AnswerViewController
+            for i in 1...answers.count {
+                let tmp = self.view.viewWithTag(i) as? UIButton
+                if tmp!.backgroundColor == UIColor.orange {
+                    self.answerText = tmp!.titleLabel!.text
+                    if tmp!.tag == correctAnswer {
+                        correct = true
+                        self.correctCount += 1
+                        print(self.correctCount)
+                    } else {
+                        correct = false
+                    }
+                }
+            }
+            destination!.incoming(correct: self.correct, incomingQuestion: self.questionText, incomingAnswer: self.answerText, incomingcorrectCount: self.correctCount, incomingQuizLength: self.quizLength, incomingQuestionCounter: self.questionCounter, incomingQuiz: self.quiz!)
+        case "QuestionHomeSegue":
+            break
         default:
             NSLog("Unknown segue identifier -- " + segue.identifier!)
         }
