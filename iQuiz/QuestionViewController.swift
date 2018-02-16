@@ -84,13 +84,13 @@ class QuestionViewController: UIViewController {
                     if tmp!.tag == correctAnswer {
                         correct = true
                         self.correctCount += 1
-                        print(self.correctCount)
                     } else {
                         correct = false
                     }
                 }
             }
-            destination!.incoming(correct: self.correct, incomingQuestion: self.questionText, incomingAnswer: self.answerText, incomingcorrectCount: self.correctCount, incomingQuizLength: self.quizLength, incomingQuestionCounter: self.questionCounter, incomingQuiz: self.quiz!)
+            let correctAns = self.quiz!.questionAnswers[self.questionCounter - 1].answers[self.correctAnswer - 1]
+            destination!.incoming(correct: self.correct, incomingQuestion: self.questionText, incomingAnswer: self.answerText, incomingcorrectCount: self.correctCount, incomingQuizLength: self.quizLength, incomingQuestionCounter: self.questionCounter, incomingQuiz: self.quiz!, incomingCorrectAnswer: correctAns)
         case "QuestionHomeSegue":
             break
         default:

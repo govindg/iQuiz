@@ -16,10 +16,11 @@ class AnswerViewController: UIViewController {
     public var correctText : String? = nil
     public var questionCounter = 0
     public var quiz : Quiz? = nil
+    public var correctAnswer : String? = nil
     @IBOutlet weak var correctLabel: UILabel!
     @IBOutlet weak var questionAnswerLabel: UILabel!
     
-    func incoming(correct: Bool, incomingQuestion: String, incomingAnswer: String, incomingcorrectCount: Int, incomingQuizLength: Int, incomingQuestionCounter: Int, incomingQuiz: Quiz) {
+    func incoming(correct: Bool, incomingQuestion: String, incomingAnswer: String, incomingcorrectCount: Int, incomingQuizLength: Int, incomingQuestionCounter: Int, incomingQuiz: Quiz, incomingCorrectAnswer: String) {
         if correct {
             self.correctText = "Correct!"
         } else {
@@ -31,6 +32,7 @@ class AnswerViewController: UIViewController {
         self.quizLength = incomingQuizLength
         self.questionCounter = incomingQuestionCounter
         self.quiz = incomingQuiz
+        self.correctAnswer = incomingCorrectAnswer
     }
     
     override func viewDidLoad() {
@@ -38,7 +40,7 @@ class AnswerViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         correctLabel.text = self.correctText
-        questionAnswerLabel.text = "Your answer for \n \(self.questionText!) \n was \(self.answerText!)"
+        questionAnswerLabel.text = "Your answer for \n\n \(self.questionText!) \n\n was \(self.answerText!) \n\n and the correct answer is \(self.correctAnswer!)"
     }
 
     override func didReceiveMemoryWarning() {
@@ -60,7 +62,6 @@ class AnswerViewController: UIViewController {
             let destination = segue.destination as? QuestionViewController
             destination!.setQuestionLabel(incoming: self.quiz!.questionAnswers[questionCounter].question)
             destination!.setAnswers(incomingAnswers: self.quiz!.questionAnswers[questionCounter].answers, correctAnswer: self.quiz!.questionAnswers[questionCounter].correctAnswer, counter: self.questionCounter + 1, quizLength: self.quiz!.questionAnswers.count, correctCount: self.correctCount)
-            print(self.correctCount)
             destination!.setQuiz(incomingQuiz: self.quiz!)
         case "FinishSegue":
             let destination = segue.destination as? FinishViewController
