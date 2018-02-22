@@ -15,6 +15,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var url : String = ""
     var quizzes : [Quiz]? = nil
     var jsonObj : NSArray = []
+    var storedURL : String = ""
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         NSLog("numberofRowsInSection called")
@@ -35,9 +36,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Do any additional setup after loading the view, typically from a nib.
-        if self.jsonObj.count > 0 {
-            getData(jsonObj: self.jsonObj)
+        self.storedURL = UserDefaults.standard.string(forKey: "quiz_url")!
+        if self.storedURL.count > 0 {
+            downloadJSON(website: self.storedURL)
+        } else if self.url.count > 0 {
+            downloadJSON(website: self.url)
         } else {
             self.quizzes = UIApplication.shared.quizRepository.getQuizzes()
         }
@@ -70,7 +75,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         })
     }
     
+    func registerSettingsBundle(){
+        let appDefaults = [String:AnyObject]()
+        UserDefaults.standard.register(defaults: appDefaults)
+    }
+    
     func downloadJSON(website: String) {
+        var q : [Quiz] = []
         if Reachability.isConnectedToNetwork() {
             let url = NSURL(string: website)
             URLSession.shared.dataTask(with: (url as? URL)!, completionHandler: {(data, response, error) -> Void in
@@ -84,8 +95,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                     if let dat = data {
                         //let jsonData = string?.data(using: .utf8)
                         print("hello")
-                        self.jsonObj = try! JSONSerialization.jsonObject(with: dat, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSArray
-                        self.getData(jsonObj: self.jsonObj)
+                        var json = try! JSONSerialization.jsonObject(with: dat, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSArray
+                        self.quizzes = self.getData(jsonObj: json)
                     }
                 }
                 
@@ -96,11 +107,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 networkAlert.dismiss(animated: true)
             })
             self.present(networkAlert, animated: true)
+            
+            self.quizzes = self.loadFromLocalStorage()
         }
     }
     
-    func getData(jsonObj : NSArray) {
-        self.quizzes = []
+    func getData(jsonObj : NSArray) -> [Quiz] {
+        var q : [Quiz] = []
         for i in 0...jsonObj.count - 1 {
             let quiz = jsonObj[i] as! [String : Any]
             let questions = quiz["questions"] as! [[String: Any]]
@@ -108,13 +121,20 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             for question in questions {
                 q_a.append(QuestionAnswer(question: question["text"] as! String, answers: question["answers"] as! [String], correctAnswer: Int(question["answer"] as! String)!))
             }
-            self.quizzes?.append(Quiz(name: quiz["title"] as! String, description: quiz["desc"] as! String, image: "\(quiz["title"]!).png", questionAnswers: q_a))
+            q.append(Quiz(name: quiz["title"] as! String, description: quiz["desc"] as! String, image: "\(quiz["title"]!).png", questionAnswers: q_a))
         }
-        UIApplication.shared.quizRepository.quizzes = self.quizzes!
         
         DispatchQueue.main.async {
             self.quizTable.reloadData()
         }
+        return q
+    }
+    
+    func loadFromLocalStorage() -> [Quiz] {
+        var fm = FileManager.default
+        let jsonURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0].appendingPathComponent("questions.json")
+        let data = NSArray(contentsOf: jsonURL) as? NSArray
+        return getData(jsonObj: data!)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -123,7 +143,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         case "QuestionSegue":
             let destination = segue.destination as! QuestionViewController
             let cell = sender as! UITableViewCell; let indexPath = quizTable.indexPath(for: cell)
-            let quiz = quizzes![(indexPath?.row)!]
+            let quiz = self.quizzes![(indexPath?.row)!]
             destination.setQuestionLabel(incoming: quiz.questionAnswers[count - 1].question)
             destination.setAnswers(incomingAnswers: quiz.questionAnswers[count - 1].answers, correctAnswer: quiz.questionAnswers[count - 1].correctAnswer, counter: count, quizLength: quiz.questionAnswers.count)
             destination.setQuiz(incomingQuiz: quiz)
