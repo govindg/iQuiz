@@ -35,14 +35,24 @@ class QuestionAnswer {
 class QuizRepository {
     static let shared = QuizRepository()
     
-    private var quizzes : [Quiz] = [
-        Quiz(name: "Mathematics", description: "Questions about Mathematics.", image: "mathematics.png", questionAnswers: []),
-        Quiz(name: "Marvel Super Heroes", description: "Questions about Marvel Super Heroes.", image: "marvel_super_hero.png", questionAnswers: []),
-        Quiz(name: "Science", description: "Questions about various scientific subjects.", image: "science.png", questionAnswers: [])
-    ]
+    var data : NSArray = []
+    
+    
+    var quizzes : [Quiz] = []
     
     func getQuizzes() -> [Quiz] {
-        populateQuestions()
+        if self.data.count == 0 {
+            quizzes = [
+                Quiz(name: "Mathematics", description: "Questions about Mathematics.", image: "Mathematics.png", questionAnswers: []),
+                Quiz(name: "Marvel Super Heroes", description: "Questions about Marvel Super Heroes.", image: "Marvel Super Heroes.png", questionAnswers: []),
+                Quiz(name: "Science", description: "Questions about various scientific subjects.", image: "Science!.png", questionAnswers: [])
+            ]
+            populateQuestions();
+            return quizzes
+        } else {
+            populateQuizzes()
+            print("hello")
+        }
         return quizzes
     }
     func getQuiz(id: Int) -> Quiz {
@@ -66,6 +76,19 @@ class QuizRepository {
         quizzes[2].questionAnswers.append(QuestionAnswer(question: "How do\nplants get energy?", answers: ["Photosynthesis", "Osmosis", "Oxygenation", "Chemistry"], correctAnswer: 1))
         quizzes[2].questionAnswers.append(QuestionAnswer(question: "What is H2O?", answers: ["Oxygen", "Chlorophyll", "Carbon", "Water"], correctAnswer: 4))
         quizzes[2].questionAnswers.append(QuestionAnswer(question: "What is\n the center of the cell?", answers: ["Mitochondria", "Nucleus", "Chloroplast", "Protoderm"], correctAnswer: 2))
+    }
+    
+    func populateQuizzes() {
+        self.quizzes = []
+        for i in 0...data.count - 1 {
+            let quiz = data[i] as! [String : Any]
+            self.quizzes.append(Quiz(name: quiz["title"] as! String, description: quiz["desc"] as! String, image: "\(quiz["title"]!).png", questionAnswers: []))
+            let questions = quiz["questions"] as! [[String: Any]]
+            self.quizzes[i].questionAnswers = []
+            for question in questions {
+                quizzes[i].questionAnswers.append(QuestionAnswer(question: question["text"] as! String, answers: question["answers"] as! [String], correctAnswer: Int(question["answer"] as! String)!))
+            }
+        }
     }
     
     
