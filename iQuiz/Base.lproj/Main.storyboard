@@ -238,7 +238,7 @@
                                 <items>
                                     <barButtonItem title="Next" id="aGS-yg-I6N">
                                         <connections>
-                                            <segue destination="BYZ-38-t0r" kind="show" id="h4T-ZZ-d1O"/>
+                                            <segue destination="BYZ-38-t0r" kind="show" identifier="FinishHome" id="h4T-ZZ-d1O"/>
                                         </connections>
                                     </barButtonItem>
                                 </items>

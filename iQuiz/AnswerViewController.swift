@@ -67,7 +67,8 @@ class AnswerViewController: UIViewController {
             let destination = segue.destination as? FinishViewController
             destination!.incoming(incomingCorrect: self.correctCount, incomingLength: self.quiz!.questionAnswers.count)
         case "AnswerHomeSegue":
-            break
+            let destination = segue.destination as? ViewController
+            destination?.setLoaded(load: true)
         default:
             NSLog("Unknown segue identifier -- " + segue.identifier!)
         }

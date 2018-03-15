@@ -21,6 +21,7 @@ class QuestionViewController: UIViewController {
     public var correct = false
     public var quizLength : Int = 0
     public var quiz : Quiz? = nil
+    var answerPushed : Bool = false
     
     func setQuestionLabel(incoming: String) {
         self.questionText = incoming
@@ -64,10 +65,13 @@ class QuestionViewController: UIViewController {
                 tmp!.backgroundColor = UIColor.blue
             }
         }
+        answerPushed = true
     }
     
     @IBAction func submitPushed(_ sender: Any) {
-        performSegue(withIdentifier: "AnswerSegue", sender: sender)
+        if answerPushed {
+            performSegue(withIdentifier: "AnswerSegue", sender: sender)
+        }
     }
     
     
@@ -92,7 +96,8 @@ class QuestionViewController: UIViewController {
             let correctAns = self.quiz!.questionAnswers[self.questionCounter - 1].answers[self.correctAnswer - 1]
             destination!.incoming(correct: self.correct, incomingQuestion: self.questionText, incomingAnswer: self.answerText, incomingcorrectCount: self.correctCount, incomingQuizLength: self.quizLength, incomingQuestionCounter: self.questionCounter, incomingQuiz: self.quiz!, incomingCorrectAnswer: correctAns)
         case "QuestionHomeSegue":
-            break
+            let destination = segue.destination as? ViewController
+            destination?.setLoaded(load: true)
         default:
             NSLog("Unknown segue identifier -- " + segue.identifier!)
         }

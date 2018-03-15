@@ -10,9 +10,11 @@
 			<key>Type</key>
 			<string>PSTextFieldSpecifier</string>
 			<key>Title</key>
-			<string>Quiz URL</string>
+			<string>Initial Quiz URL</string>
 			<key>Key</key>
 			<string>quiz_url</string>
+			<key>DefaultValue</key>
+			<string>https://tednewardsandbox.site44.com/questions.json</string>
 		</dict>
 	</array>
 </dict>
