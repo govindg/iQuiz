@@ -141,7 +141,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 } else {
                     do {
                         if let dat = data {
-                            let json = try! JSONSerialization.jsonObject(with: dat, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSArray
+                            let json = try JSONSerialization.jsonObject(with: dat, options: JSONSerialization.ReadingOptions.mutableContainers) as! NSArray
                             let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
                             let fileURL = documentsDirectory.appendingPathComponent("questions.json")
                             try json.write(to: fileURL)
