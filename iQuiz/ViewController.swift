@@ -85,7 +85,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     override func viewDidAppear(_ animated: Bool) {
         if !Reachability.isConnectedToNetwork() {
-            let networkAlert = UIAlertController(title: "No Network Connection", message: "Please connect your device to a WiFi Access Point. Loading local JSON for now.", preferredStyle: .alert)
+            let networkAlert = UIAlertController(title: "No Network Connection", message: "Please connect your device to a WiFi Access Point. Using local storage.", preferredStyle: .alert)
             networkAlert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
                 networkAlert.dismiss(animated: true)
             })
