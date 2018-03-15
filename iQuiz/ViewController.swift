@@ -46,13 +46,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         NSLog("numberofRowsInSection called")
-        return quizzes.count
+        return self.quizzes.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         NSLog("We are being asked for indexPath \(indexPath)")
         let index = indexPath.row
-        let quiz = quizzes[index]
+        let quiz = self.quizzes[index]
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "LabelCell", for: indexPath)
         cell.textLabel?.text = quiz.name
